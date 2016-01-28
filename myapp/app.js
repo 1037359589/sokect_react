@@ -71,8 +71,8 @@ var router=express.Router();
 app.use(morgan());
 /*静态路由*/
 app.use(express.static('public'));
-app.use('/static', express.static('public'));
-app.use('/js', express.static('routes'));
+app.use('/static', express.static('dist'));
+app.use('/js', express.static('dist'));
 
 
 //app.get('/', function (req, res) {
@@ -81,6 +81,9 @@ app.use('/js', express.static('routes'));
 app.get('/index',function(req,res){
   res.sendFile('public/index.html',{root:__dirname});
 });
+//app.get('/common.js',function(req,res){
+//  res.sendFile('common.js',{root:__dirname});
+//});
 //io.on('connection',function(socket){
 //  //连接成功...
 //  socket.send('客户端接受!!');
@@ -141,7 +144,7 @@ app.use(function errorHandler(err, req, res, next) {
 });
 app.use(function(req,res,next){
   console.log('每次请求都会执行该方法!!');
-  res.end('hello\n');
+  //res.end('hello\n');
   //next();
 });
 //
