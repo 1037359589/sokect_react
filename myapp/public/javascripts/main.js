@@ -1,5 +1,6 @@
 //document.getElementById('main').innerHTML='你好世界!';
 var css=require("../stylesheets/style.css");
+var ContentMode=require("./dom.js");
 var $=require('jquery');
 var React=require('react');
 var ReactDOM=require('react-dom');
@@ -9,18 +10,6 @@ if(React){
 if(ReactDOM){
     console.log(2)
 }
-
-
-var ContentMode = React.createClass({
-    render: function(){
-        return (
-            <div data-reactid="">
-            <div className="contents" data-reactwebpacid="" >链接成功啦!!!</div>
-        </div>
-        )
-    }
-});
-
 var id=window.location.search.substr(1);
 console.log(id);
 var socket = io.connect('/',{res:'id=123'});
@@ -37,20 +26,20 @@ $(document).on("click",function(){
 });
 
 socket.on('connecting',function(){
-    //连接成功
+    //正在连接...
     console.log('正在链接.....');
 });
 socket.on('reconnecting',function(){
-    //连接成功
+    //正在重连
     console.log('正在重连.....');
 });
 socket.on('reconnect',function(){
-    //连接成功
-    console.log('已重连.....');
+    //已重连成功
+    console.log('已重连成功!!');
 });
 socket.on('error',function(){
-    //连接成功
-    console.log('链接错误.....');
+    //连接错误
+    console.log('链接发生未知错误!!');
 });
 socket.on('message',function(data){
     console.log('客户端已接受信息!!');
@@ -58,4 +47,6 @@ socket.on('message',function(data){
 });
 socket.on('disconnect',function(data){
     //连接断开
+    alert("客户端已断开!!");
+    socket.send('客户端已断开!!');
 });

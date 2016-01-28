@@ -1,0 +1,1 @@
+{"version":3,"sources":["dom.js"],"names":[],"mappings":";;;AAGA,KAAK,CAAC,CAAC,CAAC,CAAC","file":"dom-compiled.js","sourcesContent":["/**\n * Created by bll on 16/1/28.\n */\nalert(1);"]}

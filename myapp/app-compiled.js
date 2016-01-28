@@ -62,24 +62,23 @@
 //
 
 var express = require('express');
-var morgan=require('morgan');
+var morgan = require('morgan');
 var app = express();
-var server=require('http').createServer(app);
-var io=require('socket.io').listen(server);
+var server = require('http').createServer(app);
+var io = require('socket.io').listen(server);
 //app.set('port'.process.env.PORT||3000);
-var router=express.Router();
+var router = express.Router();
 app.use(morgan());
 /*静态路由*/
 app.use(express.static('public'));
 app.use('/static', express.static('dist'));
 app.use('/js', express.static('dist'));
 
-
 //app.get('/', function (req, res) {
 //  res.status(200).send('欢迎来到汇智网学习！');
 //});
-app.get('/index',function(req,res){
-  res.sendFile('public/index.html',{root:__dirname});
+app.get('/index', function (req, res) {
+  res.sendFile('public/index.html', { root: __dirname });
 });
 //app.get('/common.js',function(req,res){
 //  res.sendFile('common.js',{root:__dirname});
@@ -94,17 +93,16 @@ app.get('/index',function(req,res){
 //  });
 //
 //});
-io.on('connection',function(socket){
+io.on('connection', function (socket) {
   //socket.broadcast.to('chat').emit('DATA',"发送信息!!");
-  socket.on('message',function(data){
-    socket.broadcast.emit('message',data);
+  socket.on('message', function (data) {
+    socket.broadcast.emit('message', data);
   });
-  socket.on('disconnect',function(){
+  socket.on('disconnect', function () {
     //用户已经离开...
     socket.send('用户已离开!!');
-
   });
-  io.use(function(socket, next){
+  io.use(function (socket, next) {
     //console.log('中间件使用!!',socket.request);
     if (socket.request.headers.cookie) return next();
     next(new Error('Authentication error'));
@@ -142,7 +140,7 @@ app.use(function errorHandler(err, req, res, next) {
   res.status(500);
   res.render('error', { error: err });
 });
-app.use(function(req,res,next){
+app.use(function (req, res, next) {
   console.log('每次请求都会执行该方法!!');
   //res.end('hello\n');
   //next();
@@ -157,3 +155,4 @@ module.exports = app;
 module.exports = router;
 var routes = require('./routes/index');
 
+//# sourceMappingURL=app-compiled.js.map
