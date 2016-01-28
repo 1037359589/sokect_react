@@ -13,6 +13,7 @@ if(ReactDOM){
 var id=window.location.search.substr(1);
 console.log(id);
 var socket = io.connect('/',{res:'id=123'});
+console.log(socket);
 socket.on('connect',function(){
     //连接成功
     document.getElementById('main').innerHTML='链接成功!!';
@@ -42,7 +43,7 @@ socket.on('error',function(){
     console.log('链接发生未知错误!!');
 });
 socket.on('message',function(data){
-    console.log('客户端已接受信息!!');
+    //console.log('客户端已接受信息!!');
     console.log(data);
 });
 socket.on('disconnect',function(data){
@@ -50,3 +51,4 @@ socket.on('disconnect',function(data){
     alert("客户端已断开!!");
     socket.send('客户端已断开!!');
 });
+socket.on('DisconnectReq', function() { socket.disconnect(); });

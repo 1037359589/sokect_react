@@ -109,10 +109,6 @@ io.on('connection', function (socket) {
   });
 });
 
-//io.use(function(socket){
-//  console.log(socket.request._query.id);
-//});
-
 server.listen(3000);
 /*后端路由*/
 //router.get('/add', function (req, res) {
