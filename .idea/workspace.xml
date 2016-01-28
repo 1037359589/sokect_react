@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="37b35c0b-2f9b-4201-a953-352cab7cd89c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/myapp/public/javascripts/socket.io.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myapp/app.js" afterPath="$PROJECT_DIR$/myapp/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myapp/node_modules/socket.io/node_modules/engine.io/node_modules/accepts/package.json" afterPath="$PROJECT_DIR$/myapp/node_modules/socket.io/node_modules/engine.io/node_modules/accepts/package.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myapp/node_modules/socket.io/node_modules/socket.io-adapter/node_modules/socket.io-parser/node_modules/benchmark/package.json" afterPath="$PROJECT_DIR$/myapp/node_modules/socket.io/node_modules/socket.io-adapter/node_modules/socket.io-parser/node_modules/benchmark/package.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myapp/public/index.html" afterPath="$PROJECT_DIR$/myapp/public/index.html" />
@@ -59,8 +56,8 @@
       <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/myapp/public/javascripts/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8672377">
-              <caret line="27" column="10" selection-start-line="27" selection-start-column="10" selection-end-line="27" selection-end-column="10" />
+            <state vertical-scroll-proportion="0.6423983">
+              <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -494,8 +491,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/myapp/public/javascripts/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8672377">
-          <caret line="27" column="10" selection-start-line="27" selection-start-column="10" selection-end-line="27" selection-end-column="10" />
+        <state vertical-scroll-proportion="0.6423983">
+          <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
           <folding />
         </state>
       </provider>

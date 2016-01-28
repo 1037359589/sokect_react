@@ -1,5 +1,25 @@
 //document.getElementById('main').innerHTML='你好世界!';
+var css=require("../stylesheets/style.css");
+var $=require('jquery');
+var React=require('react');
+var ReactDOM=require('react-dom');
+if(React){
+ console.log(1);
+}
+if(ReactDOM){
+    console.log(2)
+}
 
+
+var ContentMode = React.createClass({
+    render: function(){
+        return (
+            <div data-reactid="">
+            <div className="contents" data-reactwebpacid="" >链接成功啦!!!</div>
+        </div>
+        )
+    }
+});
 
 var id=window.location.search.substr(1);
 console.log(id);
@@ -7,6 +27,9 @@ var socket = io.connect('/',{res:'id=123'});
 socket.on('connect',function(){
     //连接成功
     document.getElementById('main').innerHTML='链接成功!!';
+    ReactDOM.render(
+    <ContentMode/>,document.getElementById("main")
+    );
     console.log('链接成功');
 });
 $(document).on("click",function(){
