@@ -1,9 +1,11 @@
 //document.getElementById('main').innerHTML='你好世界!';
 var css=require("../stylesheets/style.css");
-var ContentMode=require("./dom.js");
+var own_ui=require("../stylesheets/own-ui.min.css");
+//var ContentMode=require("./dom.js");
 var $=require('jquery');
 var React=require('react');
 var ReactDOM=require('react-dom');
+var ui=require("./ui.js");
 if(React){
  console.log(1);
 }
@@ -16,10 +18,10 @@ var socket = io.connect('/',{res:'id=123'});
 console.log(socket);
 socket.on('connect',function(){
     //连接成功
-    document.getElementById('main').innerHTML='链接成功!!';
-    ReactDOM.render(
-    <ContentMode/>,document.getElementById("main")
-    );
+    //document.getElementById('main').innerHTML='链接成功!!';
+    //ReactDOM.render(
+    //<ContentMode/>,document.getElementById("main")
+    //);
     console.log('链接成功');
 });
 $(document).on("click",function(){

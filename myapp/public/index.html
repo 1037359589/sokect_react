@@ -2,12 +2,49 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!--<link rel="stylesheet" href="stylesheets/style.css">-->
+    <link rel="stylesheet" href="stylesheets/style.css">
     <title>Title</title>
 </head>
 <body>
-<div id="main">aaaaaaaaaaa</div>
-<script src="static/js/common.js"></script>
+<header class="title">
+    <h1>CHAT BOX OF WEBSOKECT && REACT </h1>
+</header>
+<div class="message" id="main">
+    <div class="body">
+        <div class="got-message clearfix">
+            <div class="person fl"></div>
+            <div class="bent"></div>
+            <div class="bent-big"></div>
+            <div class="text fl">
+                asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdas
+                asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdas
+                asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdas
+            </div>
+        </div>
+        <div  class="sent-message"></div>
+    </div>
+    <div class="input">
+        <div contenteditable="true" class="text">
+        </div>
+    </div>
+    <div class="control">
+        <button class="btn border-default normal hover" data-mousedown="true">
+            清空屏幕
+        </button>
+        <button class="btn border-red normal hover add" data-mousedown="true">
+           添加成员
+        </button>
+        <button class="btn border-green normal hover delete" data-mousedown="true">
+            剔除成员
+        </button>
+        <button class="btn border-light normal hover send" data-mousedown="true">
+            发送
+        </button>
+    </div>
+</div>
+<script src="static/js/common.js">
+
+</script>
 <!--<script src="javascripts/jquery-1.11.3.min.js"></script>-->
 <script src="plugins/socket.io.js"></script>
 <script src="static/js/main.js"></script>

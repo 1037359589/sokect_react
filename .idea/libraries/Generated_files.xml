@@ -2,17 +2,24 @@
   <library name="Generated files" type="javaScript">
     <properties>
       <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/myapp/public/javascripts/jquery-own-ui.min-compiled.js" />
+        <item url="file://$PROJECT_DIR$/myapp/public/javascripts/ui-compiled.js" />
         <item url="file://$PROJECT_DIR$/myapp/public/javascripts/dom-compiled.js" />
         <item url="file://$PROJECT_DIR$/myapp/common-compiled.js" />
         <item url="file://$PROJECT_DIR$/myapp/app-compiled.js" />
+        <item url="file://$PROJECT_DIR$/myapp/public/javascripts/react-button-compiled.js" />
         <item url="file://$PROJECT_DIR$/myapp/dist/js/main-compiled.js" />
         <item url="file://$PROJECT_DIR$/myapp/public/javascripts/main-compiled.js" />
       </sourceFilesUrls>
     </properties>
     <CLASSES>
+      <root url="file://$PROJECT_DIR$/myapp/public/javascripts/react-button-compiled.js" />
+      <root url="file://$PROJECT_DIR$/myapp/public/javascripts/jquery-own-ui.min-compiled.js" />
+      <root url="file://$PROJECT_DIR$/myapp/public/javascripts/ui-compiled.js" />
       <root url="file://$PROJECT_DIR$/myapp/public/javascripts/dom-compiled.js" />
       <root url="file://$PROJECT_DIR$/myapp/common-compiled.js" />
       <root url="file://$PROJECT_DIR$/myapp/app-compiled.js" />
+      <root url="file://$PROJECT_DIR$/myapp/public/javascripts/react-button-compiled.js" />
       <root url="file://$PROJECT_DIR$/myapp/dist/js/main-compiled.js" />
       <root url="file://$PROJECT_DIR$/myapp/public/javascripts/main-compiled.js" />
     </CLASSES>
