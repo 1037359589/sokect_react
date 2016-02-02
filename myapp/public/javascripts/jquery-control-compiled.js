@@ -22,6 +22,7 @@ var $$;
     socket.on('connect', function () {
         $$.send.on("click", function (e) {
             var text = $$.messageText.text();
+            if (text == "") return false;
             var sentClone = $$.sentClone.clone().removeClass("none");
             sentClone.find(".text").text(text);
             $$.messageBody.append(sentClone);
