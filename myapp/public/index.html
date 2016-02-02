@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="stylesheets/style.css">
+    <!--<link rel="stylesheet" href="stylesheets/style.css">-->
     <title>Title</title>
 </head>
 <body>
@@ -11,33 +11,48 @@
 </header>
 <div class="message" id="main">
     <div class="body">
-        <div class="got-message clearfix">
-            <div class="person fl"></div>
-            <div class="bent"></div>
-            <div class="bent-big"></div>
-            <div class="text fl">
-                asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdas
-                asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdas
-                asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdas
+        <div class="message-block none clearfix" id="got-clone">
+            <div class="got-message clearfix">
+                <div class="person fl"><img src="images/p1.jpg" alt=""></div>
+                <!--<div class="bent"></div>-->
+                <!--<div class="bent-big"></div>-->
+                <div class="triangle-left"></div>
+                <div class="text fl">
+                    asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdas
+                    asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdas
+                    asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdas
+                </div>
             </div>
         </div>
-        <div  class="sent-message"></div>
+
+        <div class="message-block none clearfix" id="sent-clone">
+            <div  class="sent-message clearfix">
+                <div class="person fl"><img src="images/p2.jpg" alt=""></div>
+                <div class="triangle-right"></div>
+                <div class="text fr">
+                    asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdas
+                    asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdas
+                    asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdas
+                </div>
+            </div>
+        </div>
+
     </div>
     <div class="input">
-        <div contenteditable="true" class="text">
+        <div contenteditable="true" class="text" id="message-text">
         </div>
     </div>
     <div class="control">
-        <button class="btn border-default normal hover" data-mousedown="true">
+        <button class="btn border-default normal hover" data-mousedown="true" id="empty">
             清空屏幕
         </button>
-        <button class="btn border-red normal hover add" data-mousedown="true">
+        <button class="btn border-red normal hover add" data-mousedown="true" id="add-person">
            添加成员
         </button>
-        <button class="btn border-green normal hover delete" data-mousedown="true">
+        <button class="btn border-green normal hover delete" data-mousedown="true" id="delete-person">
             剔除成员
         </button>
-        <button class="btn border-light normal hover send" data-mousedown="true">
+        <button class="btn border-light normal hover send" data-mousedown="true" id="send">
             发送
         </button>
     </div>

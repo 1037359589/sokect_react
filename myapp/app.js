@@ -152,5 +152,5 @@ app.use(function(req,res,next){
 //});
 module.exports = app;
 module.exports = router;
-var routes = require('./routes/index');
+//var routes = require('./routes/index');
 
