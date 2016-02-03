@@ -11,32 +11,6 @@
 </header>
 <div class="message" id="main">
     <div class="body">
-        <div class="message-block none clearfix" id="got-clone">
-            <div class="got-message clearfix">
-                <div class="person fl"><img src="images/p1.jpg" alt=""></div>
-                <!--<div class="bent"></div>-->
-                <!--<div class="bent-big"></div>-->
-                <div class="triangle-left"></div>
-                <div class="text fl">
-                    asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdas
-                    asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdas
-                    asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdas
-                </div>
-            </div>
-        </div>
-
-        <div class="message-block none clearfix" id="sent-clone">
-            <div  class="sent-message clearfix">
-                <div class="person fl"><img src="images/p2.jpg" alt=""></div>
-                <div class="triangle-right"></div>
-                <div class="text fr">
-                    asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdas
-                    asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdas
-                    asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdas
-                </div>
-            </div>
-        </div>
-
     </div>
     <div class="input">
         <div contenteditable="true" class="text" id="message-text">
@@ -57,9 +31,27 @@
         </button>
     </div>
 </div>
-<script src="static/js/common.js">
+<div class="message-block none clearfix" id="got-clone">
+    <div class="got-message clearfix">
+        <div class="person fl"><img src="images/p1.jpg" alt=""></div>
+        <!--<div class="bent"></div>-->
+        <!--<div class="bent-big"></div>-->
+        <div class="triangle-left"></div>
+        <div class="text fl">
+        </div>
+    </div>
+</div>
 
-</script>
+<div class="message-block none clearfix" id="sent-clone">
+    <div  class="sent-message clearfix">
+        <div class="person fl"><img src="images/p2.jpg" alt=""></div>
+        <div class="triangle-right"></div>
+        <div class="text fr">
+        </div>
+    </div>
+</div>
+
+<script src="static/js/common.js"></script>
 <!--<script src="javascripts/jquery-1.11.3.min.js"></script>-->
 <script src="plugins/socket.io.js"></script>
 <script src="static/js/main.js"></script>
