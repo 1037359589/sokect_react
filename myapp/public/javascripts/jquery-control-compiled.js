@@ -24,7 +24,9 @@ var socket = io.connect('/', { res: 'id=123' });
         sentClone: $('#sent-clone'),
         messageBody: $(".message>.body"),
         empty: $("#empty"),
-        addPerson: $("#add-person")
+        addPerson: $("#add-person"),
+        personModal: $("#person-modal"),
+        cancel: $(".cancel")
     };
     //聊天框,初始化
     function init() {
@@ -37,6 +39,7 @@ var socket = io.connect('/', { res: 'id=123' });
             $('body').html("");
             return false;
         }
+        showAllMessage();
         //getExistId();
     }
     //function getExistId(){
@@ -48,14 +51,43 @@ var socket = io.connect('/', { res: 'id=123' });
     //    localStorage.setItem('id',);
     //
     //}
+    //显示聊天的所有信息
+    function getAllMessage() {
+        var messageData = chatLocal.split(";");
+        var messageArr = [];
+        messageData.forEach(function (v, k) {
+            var json = new Function("return " + v)();
+            messageArr.push(json);
+        });
+        return messageArr;
+    }
+    function showAllMessage() {
+        var message = getAllMessage();
+        var currentId = getUserId();
+        var html = "";
+        message.forEach(function (v, k) {
+            var htm;
+            if (v == undefined) return;
+            if (v.id == currentId) {
+                var sentClone = $$.sentClone.clone().removeClass("none");
+                sentClone.find(".text").text(v.text);
+                htm = sentClone.prop("outerHTML");
+            } else {
+                var gotClone = $$.gotClone.clone().removeClass("none");
+                gotClone.find(".text").text(v.text);
+                gotClone.html();
+                htm = gotClone.prop("outerHTML");
+            }
+            html += htm;
+        });
+        $$.messageBody.append(html);
+    }
     //判断是否存在该id
     function isSetId() {
         var chatArr = chatLocal.split(";");
         var pass = false;
         var isStr = '\"id\"' + ':\"' + getUserId() + '\"';
-        console.log(isStr);
         chatArr.forEach(function (v, k) {
-            console.log(v, k);
             if (v.indexOf(isStr) > -1) {
                 pass = true;
             }
@@ -118,7 +150,6 @@ var socket = io.connect('/', { res: 'id=123' });
     function filterRequest(ke) {
         var pass;
         pass = $.inArray(ke, okRequest);
-        console.log(pass);
         if (pass == -1) {
             return false;
         } else {
@@ -143,11 +174,13 @@ var socket = io.connect('/', { res: 'id=123' });
             var time = timeObj.year + "-" + timeObj.month + "-" + timeObj.day + " " + timeObj.hour + ":" + timeObj.minute + ":" + timeObj.second;
             //获取id
             var id = getUserId();
-            console.log(id);
             updateLocalChat(id, text, time);
         });
         $$.addPerson.on("click", function () {
-            alert(1);
+            $$.personModal.addClass('person-modal-active');
+        });
+        $$.cancel.on("click", function () {
+            $$.personModal.removeClass('person-modal-active');
         });
     });
     $(document).on("keyup", function (event) {
