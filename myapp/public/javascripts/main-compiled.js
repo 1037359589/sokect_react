@@ -7,6 +7,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var ui = require("./ui.js");
 var $control = require("./jquery-control.js");
+var rcom = require("./home/home.js");
 if (React) {
     console.log(1);
 }

@@ -72,7 +72,8 @@ app.use(morgan());
 /*静态路由*/
 app.use(express.static('public'));
 app.use('/static', express.static('dist'));
-app.use('/js', express.static('dist'));
+app.use('/build', express.static('build'));
+app.use('/public', express.static('public'));
 
 
 //app.get('/', function (req, res) {
@@ -81,6 +82,15 @@ app.use('/js', express.static('dist'));
 app.get('/index',function(req,res){
   res.sendFile('public/index.html',{root:__dirname});
 });
+app.get('/home',function(req,res){
+  res.sendFile('views/home.html',{root:__dirname});
+});
+//console.log(getRouter());
+//function getRouter(){
+//  var path=window.location.pathname.lastIndexOf("/");
+//  var pathName=path.substr(path);
+//  return pathName;
+//}
 //app.get('/common.js',function(req,res){
 //  res.sendFile('common.js',{root:__dirname});
 //});

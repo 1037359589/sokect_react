@@ -31,14 +31,18 @@ var socket = io.connect('/', { res: 'id=123' });
     //聊天框,初始化
     function init() {
         chatLocal = localStorage.getItem('chat');
+        console.log(chatLocal);
         var search = window.location.search;
         searchRequest = getUrlRequest(search.substr(1));
         var getId = getUserId();
-        if (!searchRequest || !isSetId()) {
-            alert('id不存在或者参数不正确!!');
-            $('body').html("");
-            return false;
+        if (chatLocal == "" || chatLocal == null) {
+            localStorage.setItem('chat', '{"id":"2","text":"index","time":"2016-2-22 13:55:51"};');
         }
+        //if(!searchRequest){
+        //    alert('id不存在或者参数不正确!!');
+        //    $('body').html("");
+        //    return false;
+        //}
         showAllMessage();
         //getExistId();
     }
@@ -53,8 +57,9 @@ var socket = io.connect('/', { res: 'id=123' });
     //}
     //显示聊天的所有信息
     function getAllMessage() {
-        var messageData = chatLocal.split(";");
         var messageArr = [];
+        if (chatLocal == '') return messageArr;
+        var messageData = chatLocal.split(";");
         messageData.forEach(function (v, k) {
             var json = new Function("return " + v)();
             messageArr.push(json);
@@ -84,8 +89,8 @@ var socket = io.connect('/', { res: 'id=123' });
     }
     //判断是否存在该id
     function isSetId() {
-        var chatArr = chatLocal.split(";");
         var pass = false;
+        var chatArr = chatLocal.split(";");
         var isStr = '\"id\"' + ':\"' + getUserId() + '\"';
         chatArr.forEach(function (v, k) {
             if (v.indexOf(isStr) > -1) {

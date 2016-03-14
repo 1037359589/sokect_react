@@ -267,7 +267,7 @@ body {
 .person-modal .input{
     width:100%;
     background: #fff;
-    border-radius: 10px;
+    border-radius:5px;
 }
 .person-modal .input input{
     padding:10px;
@@ -295,4 +295,7 @@ body {
 }
 .person-modal .btn .cancel{
     background: #53254a;
+}
+.control button{
+  margin-right:10px;
 }
