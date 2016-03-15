@@ -3,35 +3,14 @@
  */
 //var React=require('react');
 //var ReactDOM=require('react-dom');
-//var CommentBox = React.createClass({
-//    render: function() {
-//        return (
-//            <div className="commentBox">
-//                Hello, world! I am a CommentBox.asdas
-//            </div>
-//        );
-//    }
-//};
-var clicked = false;
-var SendMixin = {
-    componentWillMount: function () {
-        this.common = [];
-    },
-    getInitialState: function () {
-        return {
-            clicked: false
-        };
-    },
-    clearClicked: function () {
-        this.common.push(clearClicked.apply(null, arguments));
-    }
-};
 var messageAll = [];
 var Clear = React.createClass({
     displayName: "Clear",
 
     getInitialState: function () {
-        return { clear: this.props.initialClear };
+        return {
+            clear: this.props.initialClear
+        };
     },
     clearScreen: function () {
         var newState = !this.state.clear;
@@ -41,8 +20,8 @@ var Clear = React.createClass({
         this.props.callbackParent(newState);
     },
     render: function () {
-        var clear = this.state.clear ? "恢复记录" : "清空屏幕";
-        return React.createElement("button", { className: "btn border-default normal hover", "data-mousedown": "true", id: "empty", onClick: this.clearScreen }, clear);
+        //var clear=this.state.clear?"恢复记录":"清空屏幕";
+        return React.createElement("button", { className: "btn border-default normal hover", "data-mousedown": "true", id: "empty", onClick: this.clearScreen }, "清空屏幕");
     }
 });
 var AddPerson = React.createClass({
@@ -133,7 +112,6 @@ var ControlButton = React.createClass({
     },
     render: function () {
         var messageContent = this.props.messageContent;
-        //console.log(this.state.sendClick,222);
         return React.createElement("div", { className: "control", id: "control" }, React.createElement(Clear, { initialClear: this.state.clear, callbackParent: this.onChildChanged }), React.createElement(AddPerson, { initAdd: this.state.addPerson, callbackParent: this.handleAdd, onClick: this.handleAdd }), React.createElement(DeletePerson, null), React.createElement(SendMessage, { initHandleSend: this.onHandleSend, message: messageContent }));
     }
 });
@@ -153,17 +131,28 @@ var MessageBody = React.createClass({
         if (click) {
             this.props.initSendState();
         }
+        var clear = this.props.initClear;
+        if (clear) {
+            this.props.onInitClear();
+        }
     },
     render: function () {
-        //var clear=this.props.initClear;
-        //var htm=clear?"":this.props.initSendMessage;
         var text = this.props.initSendMessage;
         var click = this.props.sendState;
         //var htm=[];
+        //var htm=clear?[]:this.state.sendBlock;
         if (text != "" && click) {
             this.state.sendBlock.push(React.createElement(SendBlock, { initSendContent: text }));
         }
-        return React.createElement("div", { className: "body", id: "message-body", ref: "b" }, this.state.sendBlock);
+        var clear = this.props.initClear;
+        console.log(clear);
+        if (clear) {
+            this.setState({
+                sendBlock: []
+            });
+        }
+        var htm = clear ? "" : this.state.sendBlock;
+        return React.createElement("div", { className: "body", id: "message-body", ref: "b" }, htm);
     }
 });
 var SendBlock = React.createClass({
@@ -182,6 +171,7 @@ var MessageInput = React.createClass({
             content: ""
         };
     },
+    componentDidUpdate: function () {},
     handleChangeMessage: function (e) {
         var message = e.target.value;
         this.setState({
@@ -190,6 +180,12 @@ var MessageInput = React.createClass({
         this.props.onChangeInput(message);
     },
     render: function () {
+        var send = this.props.send;
+        if (send) {
+            this.setState({
+                content: ""
+            });
+        }
         return React.createElement("div", { className: "input", id: "message-input" }, React.createElement("div", { contenteditable: "true", className: "text", id: "message-text" }, React.createElement("textarea", { type: "text", name: "message-input", className: "message-input",
             onChange: this.handleChangeMessage, ref: "messageInput", value: this.state.content })));
     }
@@ -218,7 +214,7 @@ var Message = React.createClass({
 
     getInitialState: function () {
         return {
-            clear: "",
+            clear: false,
             showModel: false,
             messageContent: "",
             sendClick: false,
@@ -247,13 +243,20 @@ var Message = React.createClass({
     },
     initClick: function () {
         this.setState({
-            sendClick: false
+            sendClick: false,
+            clear: false
         });
     },
+    initClear: function () {
+        this.setState({
+            clear: false
+        });
+    },
+    initInput: function () {},
     componentDidMount: function () {},
     render: function () {
-        return React.createElement("div", { className: "message", id: "main" }, React.createElement(MessageBody, { initClear: this.state.clear, initSendMessage: this.state.messageContent,
-            initSendState: this.initClick, sendState: this.state.sendClick }), React.createElement(MessageInput, { onChangeInput: this.handleInput }), React.createElement(ControlButton, { initClear: this.state.clear, callbackParent: this.handleClear,
+        return React.createElement("div", { className: "message", id: "main" }, React.createElement(MessageBody, { initClear: this.state.clear, initSendMessage: this.state.messageContent, onInitClear: this.initClear,
+            initSendState: this.initClick, sendState: this.state.sendClick }), React.createElement(MessageInput, { onChangeInput: this.handleInput, sendState: this.state.sendClick, send: this.state.sendClick }), React.createElement(ControlButton, { initClear: this.state.clear, callbackParent: this.handleClear,
             showModel: this.handleAdd, modelState: this.state.showModel,
             sendClick: this.state.sendClick, onSendMessage: this.handleSend,
             messageContent: this.state.messageContent
