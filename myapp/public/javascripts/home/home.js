@@ -108,7 +108,6 @@ var ControlButton=React.createClass({
         this.props.showModel(!this.props.modelState);
     },
     componentDidUpdate :function(){
-        //console.log(1);
     },
     onHandleSend:function(){
         this.setState({
@@ -158,7 +157,6 @@ var MessageBody=React.createClass({
             );
         }
         var clear=this.props.initClear;
-        console.log(clear);
         if(clear){
             this.setState({
                 sendBlock:[]

@@ -117,9 +117,7 @@ var ControlButton = React.createClass({
         });
         this.props.showModel(!this.props.modelState);
     },
-    componentDidUpdate: function () {
-        //console.log(1);
-    },
+    componentDidUpdate: function () {},
     onHandleSend: function () {
         this.setState({
             sendClick: true
@@ -168,7 +166,6 @@ var MessageBody = React.createClass({
             this.state.sendBlock.push(React.createElement(SendBlock, { initSendContent: text }));
         }
         var clear = this.props.initClear;
-        console.log(clear);
         if (clear) {
             this.setState({
                 sendBlock: []
