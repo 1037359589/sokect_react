@@ -11,7 +11,22 @@
 //            </div>
 //        );
 //    }
-//});
+//};
+var clicked=false;
+var SendMixin={
+    componentWillMount:function(){
+        this.common=[];
+    },
+    getInitialState:function(){
+        return {
+            clicked:false
+        }
+    },
+    clearClicked:function(){
+       this.common.push(clearClicked.apply(null,arguments));
+    }
+};
+var messageAll=[];
 var Clear=React.createClass({
     getInitialState: function() {
         return {clear: this.props.initialClear};
@@ -24,9 +39,10 @@ var Clear=React.createClass({
         this.props.callbackParent(newState);
     },
     render:function(){
+        var clear=this.state.clear?"恢复记录":"清空屏幕";
         return (
             <button className="btn border-default normal hover" data-mousedown="true" id="empty" onClick={this.clearScreen}>
-                清空屏幕
+                {clear}
             </button>
         )
     }
@@ -61,9 +77,30 @@ var DeletePerson=React.createClass({
     }
 });
 var SendMessage=React.createClass({
+    getInitialState:function(){
+        return {
+            send:false
+        }
+    },
+    handleSend:function(){
+        this.setState({
+            send:true,
+            clicked:true
+        });
+        clicked=true;
+    },
+    initSendState:function(){
+        this.setState({
+            send:false
+        });
+    },
+    onSendMessage:function(){
+        var msg=this.props.message;
+        this.props.initHandleSend();
+    },
     render:function(){
         return (
-            <button className="btn border-light normal hover send" data-mousedown="true" id="send">
+            <button className="btn border-light normal hover send" data-mousedown="true" id="send" onClick={this.onSendMessage}>
                 发送
             </button>
         )
@@ -75,7 +112,8 @@ var ControlButton=React.createClass({
         return {
             clear:this.props.initClear,
             //addPerson:false
-            addPerson:this.props.modelState
+            addPerson:this.props.modelState,
+            sendClick:false,
         }
     },
     onChildChanged:function(newState){
@@ -90,13 +128,24 @@ var ControlButton=React.createClass({
         });
         this.props.showModel(!this.props.modelState);
     },
+    componentDidUpdate :function(){
+        //console.log(1);
+    },
+    onHandleSend:function(){
+        this.setState({
+            sendClick:true
+        });
+        this.props.onSendMessage();
+    },
     render:function(){
+        var messageContent=this.props.messageContent;
+        //console.log(this.state.sendClick,222);
         return (
             <div className="control" id="control">
                 <Clear initialClear={this.state.clear} callbackParent={this.onChildChanged}/>
                 <AddPerson initAdd={this.state.addPerson} callbackParent={this.handleAdd} onClick={this.handleAdd}/>
                 <DeletePerson/>
-                <SendMessage/>
+                <SendMessage initHandleSend={this.onHandleSend} message={messageContent}/>
             </div>
         )
     }
@@ -105,24 +154,70 @@ var ControlButton=React.createClass({
 var MessageBody=React.createClass({
     getInitialState:function(){
         return {
-            clear:this.props.initClear
+            clear:this.props.initClear,
+            content:this.props.initSendMessage,
+            sendBlock:[]
+        }
+    },
+    componentDidUpdate:function(){
+        var click=this.props.sendState;
+        if(click){
+            this.props.initSendState();
         }
     },
     render:function(){
-        var clear=this.props.initClear;
-        var htm=clear?"":"dasdasda";
+        //var clear=this.props.initClear;
+        //var htm=clear?"":this.props.initSendMessage;
+        var text=this.props.initSendMessage;
+        var click=this.props.sendState;
+        //var htm=[];
+        if(text!=""&&click){
+            this.state.sendBlock.push(
+                <SendBlock initSendContent={text}/>
+            );
+        }
         return (
             <div className="body" id="message-body" ref="b">
-                {htm}
+                {this.state.sendBlock}
             </div>
         )
     }
 });
+var SendBlock=React.createClass({
+    render:function(){
+        var content=this.props.initSendContent;
+        return (
+            <div className="message-block clearfix" id="sent-clone">
+                <div  className="sent-message clearfix">
+                    <div className="person fl"><img src="images/p2.jpg" alt=""/></div>
+                    <div className="triangle-right"></div>
+                    <div className="text fr">
+                        {content}
+                    </div>
+                </div>
+            </div>
+        );
+    }
+});
 var MessageInput=React.createClass({
+    getInitialState:function(){
+        return {
+            content:""
+        }
+    },
+    handleChangeMessage:function(e){
+        var message=e.target.value;
+        this.setState({
+            content:message
+        });
+        this.props.onChangeInput(message);
+    },
     render:function(){
         return (
             <div className="input" id="message-input">
                 <div contenteditable="true" className="text" id="message-text">
+                    <textarea type="text" name="message-input" className="message-input"
+                              onChange={this.handleChangeMessage} ref="messageInput" value={this.state.content}></textarea>
                 </div>
             </div>
         )
@@ -164,7 +259,10 @@ var Message=React.createClass({
     getInitialState:function(){
         return {
             clear:"",
-            showModel:false
+            showModel:false,
+            messageContent:"",
+            sendClick:false,
+            sendBlock:[]
         }
     },
     handleClear:function(newState){
@@ -177,13 +275,34 @@ var Message=React.createClass({
             showModel:newState
         });
     },
+    handleInput:function(message){
+        this.setState({
+            messageContent:message
+        });
+    },
+    handleSend:function(){
+        this.setState({
+            sendClick:true
+        });
+    },
+    initClick:function(){
+        this.setState({
+            sendClick:false
+        });
+    },
+    componentDidMount: function(){
+    },
     render:function(){
         return (
             <div className="message" id="main">
-                <MessageBody initClear={this.state.clear}/>
-                <MessageInput/>
+                <MessageBody initClear={this.state.clear} initSendMessage={this.state.messageContent}
+                             initSendState={this.initClick} sendState={this.state.sendClick}/>
+                <MessageInput onChangeInput={this.handleInput} />
                 <ControlButton initClear={this.state.clear}  callbackParent={this.handleClear}
-                               showModel={this.handleAdd} modelState={this.state.showModel}/>
+                               showModel={this.handleAdd} modelState={this.state.showModel}
+                               sendClick={this.state.sendClick} onSendMessage={this.handleSend}
+                               messageContent={this.state.messageContent}
+                />
                 <AddModel initShow={this.state.showModel} initChangeShow={this.handleAdd}/>
             </div>
         )
